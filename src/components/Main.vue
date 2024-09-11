@@ -19,9 +19,9 @@ export default {
   <main>
     <div class="my-container flex-sm-row vh-100">
       <div class="my-col">
-        <SearchBar />
+        <SearchBar class="m-2" />
         <Display />
-        <Stats />
+        <Stats class="m-2" />
       </div>
       <div class="my-col">
         <Team />

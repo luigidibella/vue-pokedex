@@ -28,7 +28,7 @@ export default {
 </script>
 
 <template>
-  <div class="square pb-3">
+  <div class="square pt-sm-4">
     <div v-if="this.store.teamPokemon.length === 0" class="d-flex-center h-100">
         Team
     </div>
@@ -47,9 +47,18 @@ export default {
 
 <style scoped>
 .square {
-  width: 80%;
-  height: 80%;
+  min-width: 90%;
+  height: 90%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #ccc; /* Optional, solo per visualizzare meglio i limiti */
   background-color: white;
-  border:  1px solid black;
+}
+
+@media (max-width: 575px) {
+  .square {
+    height: 270px; /* Regola l'altezza per gli schermi piccoli */
+    padding-bottom: 15px;
+  }
 }
 </style>

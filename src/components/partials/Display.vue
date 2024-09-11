@@ -37,7 +37,7 @@ export default {
 
 <style scoped>
 .square {
-  height: 150px;
+  height: 125px;
   margin: 10px;
   border: 3px solid black;
   padding: 10px;
