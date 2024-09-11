@@ -3,7 +3,6 @@ import axios from 'axios';
 import { store } from '../../data/store';
 
 export default {
-
   data(){
     return{
       store,
@@ -12,18 +11,40 @@ export default {
   },
 
   methods: {
-    getApi(){
+    getApi() {
       this.store.errorString = '';
       this.store.tempPokemon = {};
       axios.get(this.store.apiUrl + this.pokemonName)
-      .then(result => {
-        console.log(`Il mio pokémon:`, result.data.name, result.data);
-        this.store.tempPokemon = result.data;
-      })
-      .catch(error => {
-        console.log(error);
-        this.store.errorString = 'Nessun risultato trovato'
-      })
+        .then(result => {
+          if (result.data && result.data.name) {
+            this.store.tempPokemon = result.data;
+            this.store.errorString = '';
+          } else {
+            this.store.errorString = 'Nessun risultato trovato';
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          this.store.errorString = 'Nessun risultato trovato';
+        });
+    },
+    catchPokemon() {
+      if (this.store.teamPokemon.length >= 6) {
+        this.store.errorString = 'Il team può avere al massimo 6 Pokémon!';
+      } else if (this.store.tempPokemon && Object.keys(this.store.tempPokemon).length > 0) {
+        this.store.teamPokemon.push(this.store.tempPokemon);
+        this.store.errorString = '';
+      } else {
+        this.store.errorString = 'Nessun Pokémon da catturare';
+      }
+    }
+    ,
+    releaseLastPokemon() {
+      if (this.store.teamPokemon.length > 0) {
+        this.store.teamPokemon.pop();
+      } else {
+        console.error('La squadra è vuota, nessun Pokémon da rimuovere.');
+      }
     }
   },
 
@@ -31,7 +52,6 @@ export default {
     // this.getApi()
   },
 }
-
 </script>
 
 <template>
@@ -47,12 +67,15 @@ export default {
       <input
         v-model.trim="pokemonName"
         @keyup.enter="getApi"
+        @keyup.up="catchPokemon"
+        @keyup.down="releaseLastPokemon"
         class="form-control mx-2" 
         type="search" 
         placeholder="Nome pokémon" 
         aria-label="Search"
       >
       <button 
+        @click="catchPokemon"
         class="btn btn-danger"
       >Cattura!</button>
     </div>
