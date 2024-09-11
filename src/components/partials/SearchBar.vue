@@ -14,9 +14,11 @@ export default {
   methods: {
     getApi(){
       this.store.errorString = '';
+      this.store.tempPokemon = {};
       axios.get(this.store.apiUrl + this.pokemonName)
       .then(result => {
-        console.log(`Il mio pokémon:`, result.data);
+        console.log(`Il mio pokémon:`, result.data.name, result.data);
+        this.store.tempPokemon = result.data;
       })
       .catch(error => {
         console.log(error);

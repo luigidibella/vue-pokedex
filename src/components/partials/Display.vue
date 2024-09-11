@@ -23,6 +23,12 @@ export default {
         <h4 class="my-2">{{ this.store.errorString }}</h4>
       </div>
       <div
+        v-else-if="store.tempPokemon?.sprites"
+      >
+        <img :src="store.tempPokemon.sprites.back_default" alt="">
+        <img :src="store.tempPokemon.sprites.front_default" alt="">
+      </div>
+      <div
         v-else
       >
         Display
