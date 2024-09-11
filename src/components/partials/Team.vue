@@ -11,12 +11,12 @@ export default {
   methods: {
     releasePokemon(index) {
       this.store.teamPokemon.splice(index, 1);
+      this.store.saveTeam(); // Salva il team aggiornato nel localStorage
       
-      // Verifica se l'array non è vuoto, altrimenti imposta tempPokemon a null o un valore predefinito
       if (this.store.teamPokemon.length > 0) {
         this.store.tempPokemon = this.store.teamPokemon[this.store.teamPokemon.length - 1];
       } else {
-        this.store.tempPokemon = null; // o qualsiasi valore predefinito
+        this.store.tempPokemon = {};
       }
     },
     showPokemon(pokemon) {

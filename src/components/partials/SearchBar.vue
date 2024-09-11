@@ -34,14 +34,15 @@ export default {
       } else if (this.store.tempPokemon && Object.keys(this.store.tempPokemon).length > 0) {
         this.store.teamPokemon.push(this.store.tempPokemon);
         this.store.errorString = '';
+        this.store.saveTeam(); // Salva il team aggiornato nel localStorage
       } else {
         this.store.errorString = 'Nessun Pokémon da catturare';
       }
-    }
-    ,
+    },
     releaseLastPokemon() {
       if (this.store.teamPokemon.length > 0) {
         this.store.teamPokemon.pop();
+        this.store.saveTeam(); // Salva il team aggiornato nel localStorage
       } else {
         console.error('La squadra è vuota, nessun Pokémon da rimuovere.');
       }
@@ -49,8 +50,8 @@ export default {
   },
 
   mounted() {
-    // this.getApi()
-  },
+    this.store.loadTeam();
+  }
 }
 </script>
 
