@@ -1,13 +1,32 @@
 <script>
-export default {
+import { store } from '../../data/store';
 
+export default {
+  
+  data(){
+    return{
+      store,
+      pokemonName: ''
+    }
+  },
 }
+
 </script>
 
 <template>
   <div class="card bg-dark-subtle" style="width: 15rem;">
     <div class="square d-flex-center">
-      Display
+      <div
+        v-if="this.store.errorString.length > 0" 
+        class="text-center"
+      >
+        <h4 class="my-2">{{ this.store.errorString }}</h4>
+      </div>
+      <div
+        v-else
+      >
+        Display
+      </div>
     </div>
     <!-- <img src="..." class="card-img-top" alt="..."> -->
   </div>
