@@ -4,8 +4,21 @@ import { store } from '../../data/store';
 export default {
   data(){
     return{
-      store
+      store,
+      showFrontImage: true
     }
+  },
+
+  methods: {
+    startImageRotation() {
+      setInterval(() => {
+        this.showFrontImage = !this.showFrontImage;
+      }, 2000);
+    }
+  },
+  
+  mounted() {
+    this.startImageRotation();
   }
 }
 </script>
@@ -13,25 +26,26 @@ export default {
 <template>
   <div class="card bg-dark-subtle" style="width: 15rem;">
     <div class="square d-flex-center">
-      <div class="bg-white"
+      <div class="bg-white w-100 d-flex-center"
         v-if="store.tempPokemon?.sprites"
       >
-        <img :src="store.tempPokemon.sprites.back_default" alt="">
-        <img :src="store.tempPokemon.sprites.front_default" alt="">
+        <img
+          v-if="showFrontImage"
+          :src="store.tempPokemon.sprites.front_default"
+          alt="Front Sprite"
+          >
+          <img
+          v-else
+          :src="store.tempPokemon.sprites.back_default"
+          alt="Back Sprite"
+        >
       </div>
-      <!-- <div
-        v-else-if="this.store.errorString.length > 0" 
-        class="text-center"
-      >
-        <h4 class="my-2">{{ this.store.errorString }}</h4>
-      </div> -->
       <div class="screen-container d-flex-center"
         v-else
       >
         <img src="/screen.jpg" alt="" class="screen">
       </div>
     </div>
-    <!-- <img src="..." class="card-img-top" alt="..."> -->
   </div>
 </template>
 
@@ -41,7 +55,6 @@ export default {
   margin: 10px;
   border: 3px solid black;
   padding: 10px;
-  /* background-color: white; */
   background-color: #231f20;
 }
 
