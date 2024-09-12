@@ -14,7 +14,8 @@ export default {
     getApi() {
       this.store.errorString = '';
       this.store.tempPokemon = {};
-      axios.get(this.store.apiUrl + this.pokemonName)
+      const pokemonNameLowercase = this.pokemonName.toLowerCase();
+      axios.get(this.store.apiUrl + pokemonNameLowercase)
         .then(result => {
           if (result.data && result.data.name) {
             this.store.tempPokemon = result.data;
@@ -56,33 +57,37 @@ export default {
 </script>
 
 <template>
-  <div>
-    <div class="d-flex" role="search">
-      <button 
-        @click="getApi"
-        class="btn btn-success" 
-        type="button"
-      >
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-      <input
-        v-model.trim="pokemonName"
-        @keyup.enter="getApi"
-        @keyup.up="catchPokemon"
-        @keyup.down="releaseLastPokemon"
-        class="form-control mx-2" 
-        type="search" 
-        placeholder="Nome pokémon" 
-        aria-label="Search"
-      >
-      <button 
-        @click="catchPokemon"
-        class="btn btn-danger"
-      >Cattura!</button>
-    </div>
+  <div class="d-flex m-1" role="search">
+    <button 
+      @click="getApi"
+      class="btn btn-success" 
+      type="button"
+    >
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+    <input
+      v-model.trim="pokemonName"
+      @keyup.enter="getApi"
+      @keyup.up="catchPokemon"
+      @keyup.down="releaseLastPokemon"
+      id="search"
+      class="form-control mx-2" 
+      type="search" 
+      placeholder="Nome pokémon" 
+      aria-label="Search"
+    >
+    <button 
+      @click="catchPokemon"
+      class="btn btn-danger"
+    >
+      <img src="/pokeball.svg" alt="" class="invert-colors">
+      <!-- <span class="catch-text">Cattura!</span> -->
+    </button>
   </div>
 </template>
 
 <style>
-
+.invert-colors {
+  filter: invert(1);
+}
 </style>

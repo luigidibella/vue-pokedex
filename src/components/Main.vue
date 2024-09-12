@@ -9,9 +9,8 @@ export default {
     SearchBar,
     Display,
     Stats,
-    Team,
+    Team
   }
-
 }
 </script>
 
@@ -19,11 +18,11 @@ export default {
   <main>
     <div class="my-container flex-sm-row vh-100">
       <div class="my-col">
-        <SearchBar class="m-2" />
+        <SearchBar />
         <Display />
-        <Stats class="m-2" />
+        <Stats />
       </div>
-      <div class="my-col">
+      <div class="my-col p-1">
         <Team />
       </div>
     </div>
@@ -41,6 +40,7 @@ main {
   
   background-color: #ced4da;
 }
+
 .my-container {
   width: 800px;
   height: 500px;

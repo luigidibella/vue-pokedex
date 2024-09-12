@@ -4,7 +4,7 @@ import { store } from '../../data/store';
 export default {
   data(){
     return{
-      store,
+      store
     }
   },
   
@@ -23,12 +23,12 @@ export default {
       this.store.errorString = '';
       this.store.tempPokemon = pokemon;
     }
-  },
+  }
 }
 </script>
 
 <template>
-  <div class="square pt-sm-4">
+  <div class="square pt-sm-1">
     <div v-if="this.store.teamPokemon.length === 0" class="d-flex-center h-100">
         Team
     </div>
@@ -40,24 +40,26 @@ export default {
     >
       <img :src="pokemon.sprites.versions['generation-viii'].icons.front_default" alt="">
       <a @click.prevent="showPokemon(pokemon)" href="#" class="m-0">{{ pokemon.name }}</a>
-      <div @click="releasePokemon(index)" class="btn btn-danger ms-auto me-2">X</div>
+      <div @click="releasePokemon(index)" class="btn btn-danger ms-auto me-2"><i class="fa-solid fa-xmark"></i></div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .square {
-  min-width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 80%;
   overflow-y: auto;
   overflow-x: hidden;
-  border: 1px solid #ccc; /* Optional, solo per visualizzare meglio i limiti */
+  border: 1px solid black;
+  border-radius: 5px;
   background-color: white;
 }
 
 @media (max-width: 575px) {
   .square {
-    height: 270px; /* Regola l'altezza per gli schermi piccoli */
+    max-width: 276px;
+    height: 320px;
     padding-bottom: 15px;
   }
 }
