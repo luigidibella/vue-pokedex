@@ -21,17 +21,17 @@ export default {
             this.store.tempPokemon = result.data;
             this.store.errorString = '';
           } else {
-            this.store.errorString = 'Nessun risultato trovato';
+            this.store.errorString = 'Nessun Pokémon trovato';
           }
         })
         .catch(error => {
           console.log(error);
-          this.store.errorString = 'Nessun risultato trovato';
+          this.store.errorString = 'Nessun Pokémon trovato';
         });
     },
     catchPokemon() {
       if (this.store.teamPokemon.length >= 6) {
-        this.store.errorString = 'Il team può avere al massimo 6 Pokémon!';
+        this.store.errorString = 'La squadra può avere al massimo 6 Pokémon!';
       } else if (this.store.tempPokemon && Object.keys(this.store.tempPokemon).length > 0) {
         this.store.teamPokemon.push(this.store.tempPokemon);
         this.store.errorString = '';

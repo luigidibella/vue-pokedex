@@ -51,7 +51,7 @@ export default {
         </div>
       </div>
       <p v-else class="d-flex-center h-100">
-        Stats
+        Statistiche
       </p>
     </div>
   </div>
