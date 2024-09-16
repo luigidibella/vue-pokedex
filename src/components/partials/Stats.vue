@@ -1,5 +1,6 @@
 <script>
 import { store } from '../../data/store';
+import Spinner from './Spinner.vue';
 
 export default {
   data(){
@@ -8,9 +9,16 @@ export default {
     }
   },
 
+  components: {
+    Spinner,
+  },
+
   computed: {
     formattedTypes() {
       return this.store.tempPokemon?.types?.map(typeInfo => typeInfo.type.name).join(' / ') || '';
+    },
+    loading() {
+      return store.loading;
     }
   }
 }
@@ -24,6 +32,9 @@ export default {
         class="d-flex-center h-100 text-center"
       >
         <h4 class="my-2">{{ this.store.errorString }}</h4>
+      </div>
+      <div v-else-if="loading" class="d-flex-center h-100 text-center text-success">
+        <Spinner />
       </div>
       <div v-else-if="Object.keys(this.store.tempPokemon).length > 0">
         <p class="card-text text-capitalize">

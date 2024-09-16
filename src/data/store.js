@@ -5,8 +5,13 @@ export const store = reactive({
   errorString: '',
   tempPokemon: {},
   teamPokemon: JSON.parse(localStorage.getItem('teamPokemon')) || [], // Carica i Pokémon dal localStorage
+  loading: false,
   queryParams: {
     name: '',
+  },
+
+  setLoading(status) {
+    this.loading = status;
   },
 
   // Metodo per salvare i dati del team nel localStorage

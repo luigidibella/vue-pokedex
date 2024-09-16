@@ -1,11 +1,22 @@
 <script>
 import { store } from '../../data/store';
+import Spinner from './Spinner.vue';
 
 export default {
   data(){
     return{
       store,
       showFrontImage: true
+    }
+  },
+
+  components: {
+    Spinner,
+  },
+
+  computed: {
+    loading() {
+      return store.loading;
     }
   },
 
@@ -33,8 +44,8 @@ export default {
           v-if="showFrontImage"
           :src="store.tempPokemon.sprites.front_default"
           alt="Front Sprite"
-          >
-          <img
+        >
+        <img
           v-else
           :src="store.tempPokemon.sprites.back_default"
           alt="Back Sprite"
@@ -43,7 +54,10 @@ export default {
       <div class="screen-container d-flex-center"
         v-else
       >
-        <img src="/screen.jpg" alt="" class="screen">
+        <div v-if="loading" class="text-danger">
+          <Spinner />
+        </div>
+        <img v-else src="/screen.jpg" alt="" class="screen">
       </div>
     </div>
   </div>

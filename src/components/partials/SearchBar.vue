@@ -12,6 +12,7 @@ export default {
 
   methods: {
     getApi() {
+      this.store.setLoading(true);
       this.store.errorString = '';
       this.store.tempPokemon = {};
       const pokemonNameLowercase = this.pokemonName.toLowerCase();
@@ -27,6 +28,9 @@ export default {
         .catch(error => {
           console.log(error);
           this.store.errorString = 'Nessun Pokémon trovato';
+        })
+        .finally(() => {
+          this.store.setLoading(false);
         });
     },
     catchPokemon() {
